@@ -40,7 +40,7 @@ export const register = async (req, res) => {
 
         res.status(201).json({
             message: "User registered!",
-            user_info: newUser.rows[0]
+            user: newUser.rows[0].email
         });
 
 
@@ -90,7 +90,7 @@ export const login = async (req, res) => {
         );
 
         return res.status(200).json({
-            user: user.rows[0],
+            user: user.rows[0].email,
             accessToken: accessToken,
         });
 

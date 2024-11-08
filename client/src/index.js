@@ -6,9 +6,10 @@ import { createBrowserRouter, RouterProvider,} from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
-import { AuthProvider } from './AuthContext';
+import { AuthProvider } from './hooks/useAuth';
 import ProtectedRoute from './ProtectedRoute';
-import { loginAction, registerAction } from './actions/authActions';
+import { action as loginAction } from './pages/Login';
+import { action as registerAction } from './pages/Register';
 
 const router = createBrowserRouter([
   {

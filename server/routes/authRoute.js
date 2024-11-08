@@ -8,7 +8,9 @@ const router = express.Router();
 
 router.post('/register', auth.register);
 router.get('/login');
-router.post('/login', authenticated, auth.login);
+router.post('/login', auth.login);
+
+// router.post('/login', authenticated, auth.login);
 
 
 
