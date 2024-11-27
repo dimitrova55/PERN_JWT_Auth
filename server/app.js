@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 
 import authRouter from "./routes/authRoute.js";
+import userRouter from "./routes/userRouter.js"
 import db from "./db.js";
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(cors());
 
 // ROUTES
 app.use('/auth', authRouter);
+app.use('/user', userRouter);
 
 app.listen(port, () => {
     console.log(`Server running on port: ${port}`);    

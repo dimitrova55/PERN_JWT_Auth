@@ -69,6 +69,9 @@ export const login = async (req, res) => {
             values: [email]
         });
 
+        // console.log(user.rows);
+        
+
         if(user.rowCount <= 0) {
             return res.status(409).json({message: "Incorrect email or password!"});
         }
@@ -84,7 +87,7 @@ export const login = async (req, res) => {
 
         // 5. Generate JWT token
         const accessToken = jwt.sign(
-            {userId: user.id},
+            {userId: user.rows[0].id},
             process.env.accessTokenSecret,
             {subject: 'accessApi', expiresIn: '30m'}
         );

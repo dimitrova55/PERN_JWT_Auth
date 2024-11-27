@@ -40,8 +40,8 @@ function Register() {
         async function fetchData() {
           if (actionData?.success) {
             // console.log("action data: ", actionData)
-            navigate("/dashboard", { replace: true });
-          } 
+            navigate("/login", { replace: true });
+          } // else throw an error
         }
         fetchData();    
       });

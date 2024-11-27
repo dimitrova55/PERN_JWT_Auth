@@ -33,24 +33,23 @@ const useLocalStorage = function (keyName, defaultValue) {
 }
 
 export function AuthProvider({ children }){
-    const [user, setUser] = useLocalStorage("user", null);
+    // const [user, setUser] = useLocalStorage("user", null);
     const [token, setToken] = useLocalStorage("token", null);
-    // const navigate = useNavigate();
 
     // call this function to authenticate the user
-    const login = async(user, token) => {
-        console.log( user, token);
-        setUser(user);
+    const login = async(token) => {
+        // console.log(token);
+        // setUser(user);
         setToken(token);
     };
 
     const logout = () => {
-        setUser(null);
+        // setUser(null);
         setToken(null);
     };    
 
     return (
-        <AuthContext.Provider value={{user, token, login, logout}}>
+        <AuthContext.Provider value={{token, login, logout}}>
             {children}
         </AuthContext.Provider>
     );

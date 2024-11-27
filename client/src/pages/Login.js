@@ -44,7 +44,7 @@ function Login() {
     async function fetchData() {
       if (actionData?.success) {
         // console.log(actionData);
-        await login( actionData.user, actionData.token); // Set the user in the auth context
+        await login(actionData.token); // Set the user in the auth context
         navigate("/dashboard", { replace: true });
       } 
     }
