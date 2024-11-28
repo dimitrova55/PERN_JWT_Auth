@@ -15,8 +15,6 @@ export async function action({request}) {
         });
 
         const data = await response.json();
-        // console.log(data);
-        // return null;
             
         if (response.ok) {
             console.log(data);
@@ -26,7 +24,7 @@ export async function action({request}) {
         }
         
     } catch (error) {
-        console.log("Login request failed:", error);
+        console.log("Register request failed:", error);
         return { success: false, error: "An error occurred. Please try again later." };
     }   
 }

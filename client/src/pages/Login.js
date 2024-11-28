@@ -42,11 +42,13 @@ function Login() {
 
   useEffect(() => {
     async function fetchData() {
+      console.log("Login");
+      
       if (actionData?.success) {
         // console.log(actionData);
         await login(actionData.token); // Set the user in the auth context
         navigate("/dashboard", { replace: true });
-      } 
+      }
     }
     fetchData();    
   });

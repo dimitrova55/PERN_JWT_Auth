@@ -12,11 +12,11 @@ export const dashboard = async(req, res) => {
         })
         
         // console.log(user.rows[0])
-        res.status(200).json(user.rows[0])
+        res.status(200).json({user: user.rows[0]})
 
     } catch (error) {
         console.log(error.message)
-        res.status(500).json("Server error.")
+        res.status(500).json({message: "Server error."})
     }
 }
 

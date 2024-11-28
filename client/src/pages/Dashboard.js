@@ -1,57 +1,53 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth.js';
 
-const Dashboard = () => {
-
-    const [name, setName] = useState("")
-
-    async function getName() {
-
-        // const navigate = useNavigate(); 
-
+function Dashboard () {
+    const [user, setUser] = useState(null); 
+    const navigate = useNavigate();
+    const { logout } = useAuth();
+    
+    async function fetchData(){
         try {
-            console.log(localStorage.token);
+            // console.log(localStorage.token);
             
             const response = await fetch("http://localhost:5000/user/dashboard", {
                 method: "GET",
                 headers: {
                     Authorization: localStorage.token
                 },
-            });
-
+            });    
             const data = await response.json();
-            // console.log(data);
+            // console.log(data.user.name);            
+            
             if (response.ok) {
-                console.log(data); 
-
-            } else if (response.status === 401) {
-    
-                // Check the specific error message
-                if (data.message === "Access token expired.") {
-                    console.warn("Token expired. Logging out...");
-                    alert("Your session has expired. Please log in again.");
-                } else if (data.message === "Access token invalid") {
-                    console.warn("Token invalid. Logging out...");
-                    alert("Invalid token detected. Please log in again.");
-                }
-    
-                // Remove token and redirect to login
-                localStorage.removeItem("token");
-                // navigate("/login", { replace: true });
+                setUser(data.user.name)
+                console.log(user);
+                
+            } else {
+                await logout();
+                navigate("/login", {replace: true});
             }
-
         } catch (error) {
             console.error(error.message)
         }
+    
     }
-
+    
     useEffect(() => {
-        getName();
+        fetchData();
     })
+
+    async function logUserOut(e) {
+        e.preventDefault();
+        await logout();
+        navigate("/", {replace: true});
+    }
 
     return(
         <>
-        <h1>Dashboard</h1>
+        <h1>Hello {user}</h1>
+        <button className="btn btn-primary" onClick={(e => logUserOut(e))}>Logout</button>
         </>
     );
 }
